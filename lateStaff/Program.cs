@@ -7,7 +7,6 @@ namespace lateStaff
         static void Main(string[] args)
         {
             var office = new Office();
-            office.GetStaffById(0);
 
             Console.WriteLine("Enter the letter below:\n");
 
@@ -20,15 +19,33 @@ namespace lateStaff
             {
                 case "L":
                     Console.WriteLine("Enter staff ID:");
-                    Console.ReadLine();
+                    var staffIdNumber = (Console.ReadLine());
+
+                    bool success = int.TryParse(staffIdNumber, out var staffId);
+
+                    if(!success)
+                    {
+                        Console.WriteLine("Invid StaffId");
+                    }
+                  
+                   var gettingStaffId = office.GetStaffById(staffId);
+
+                   if (gettingStaffId == null)
+                    {
+                        Console.WriteLine("Staff does not exist");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Successfull");
+
+                        office.LogArrivalTime(staffId);
+                    }
+                    
                     break;
 
                 case "R":
                     Console.WriteLine("Enter Arrival time:");
-                    Convert.ToDouble(Console.ReadLine());
-                    break;
-                default:
-                    Console.WriteLine("Staff ID dose not exist");
+                    var arrivalTime = Convert.ToDouble(Console.ReadLine());
                     break;
 
 
